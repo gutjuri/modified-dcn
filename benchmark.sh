@@ -9,7 +9,7 @@
 bpr=$(expr 8 \* 1024)
 n=3
 ti=100 #ms
-out_file=../bericht/benchmarks/n"$n"_bpr"$bpr"_ti"$ti".txt
+out_file=benchmarks/n"$n"_bpr"$bpr"_ti"$ti".txt
 
 gen_config_files() {
   for peernr in $(seq 1 $1); do
@@ -17,14 +17,14 @@ gen_config_files() {
   done
 
   mkdir -p benchmarks
-  cp docker-compose-template.yml docker-compose-mat.yml
+  cp examples/docker-compose-template.yml docker-compose-mat.yml
 
   for peer in $PEERS; do
     PEERS_WO_SELF=$(echo $PEERS | tr ' ' '\0' | tr -d '\n' | grep -vz $peer | sed -z -e 's/\(.*\)/  - \1\\n/')
     PEER_HOSTNAME=$(echo $peer | sed s/:.\*//)
     PEER_PORT=$(echo $peer | sed s/.\*://)
     BM_CFG_FILENAME=bm-config-$PEER_HOSTNAME.yml
-    cp config1-template.yml benchmarks/$BM_CFG_FILENAME
+    cp examples/config1-template.yml benchmarks/$BM_CFG_FILENAME
 
 
     sed -i "s/# peers-inp-here/$PEERS_WO_SELF/" benchmarks/$BM_CFG_FILENAME
@@ -46,9 +46,6 @@ gen_config_files() {
 
 
 gen_config_files $n $bpr $ti
-
-# for demo purposes we end right here
-exit
 
 for i in $(seq 1 5); do
   TIME=$(timeout 5m docker-compose -f docker-compose-mat.yml up --build \

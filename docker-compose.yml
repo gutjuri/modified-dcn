@@ -6,7 +6,7 @@ services:
     environment:
       EDCN_CONFIG: config1.yml
     volumes:
-      - ./config1.yml:/app/config1.yml
+      - ./examples/config1.yml:/app/config1.yml
     ports:
       - 1337:1337
     networks:
@@ -21,7 +21,7 @@ services:
     ports:
       - 1338:1338
     volumes:
-      - ./config2.yml:/app/config2.yml
+      - ./examples/config2.yml:/app/config2.yml
     networks:
       testing_net:
         ipv4_address: 172.28.1.2
@@ -34,7 +34,7 @@ services:
     ports:
       - 1339:1339
     volumes:
-      - ./config3.yml:/app/config3.yml
+      - ./examples/config3.yml:/app/config3.yml
     networks:
       testing_net:
         ipv4_address: 172.28.1.3
