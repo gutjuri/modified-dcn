@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  c1:
+    build: .
+    environment:
+      EDCN_CONFIG: config1.yml
+    volumes:
+      - ./config1.yml:/app/config1.yml
+    ports:
+      - 1337:1337
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.1
+    cap_add:
+      - NET_ADMIN
+  c2:
+    build: .
+    environment:
+      EDCN_CONFIG: config2.yml
+    ports:
+      - 1338:1338
+    volumes:
+      - ./config2.yml:/app/config2.yml
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.2
+    cap_add:
+      - NET_ADMIN
+  c3:
+    build: .
+    environment:
+      EDCN_CONFIG: config3.yml
+    ports:
+      - 1339:1339
+    volumes:
+      - ./config3.yml:/app/config3.yml
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.3
+    cap_add:
+      - NET_ADMIN
+
+networks:
+  testing_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16

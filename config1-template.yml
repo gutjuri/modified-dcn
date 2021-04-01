@@ -1,0 +1,9 @@
+ownIP: #OWN_IP_HERE
+peers:
+# peers-inp-here
+stdPort: 1337
+bytesPerRound: #BPR_HERE
+roundInterval: #RI_HERE
+k: #K_HERE
+sendMessagePartsTo: []
+recvMessagePartsFrom: []

@@ -1,0 +1,11 @@
+ownIP: 172.28.1.1:1337
+peers:
+  - 172.28.1.2:1338
+  - 172.28.1.3:1339
+
+stdPort: 1337
+bytesPerRound: 8192
+roundInterval: 100
+k: 3
+sendMessagePartsTo: []
+recvMessagePartsFrom: []
